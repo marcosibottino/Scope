@@ -1,0 +1,10 @@
+export default function BillingPage() {
+  return (
+    <div className="p-8">
+      <h1 className="text-2xl font-semibold">Meeting</h1>
+      <p className="mt-2 opacity-70">
+        Here will be the Meeting Section.
+      </p>
+    </div>
+  )
+}
