@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { ICONS } from '@/components/icons'
 import { clearSession } from '@/lib/session'
 import { SIDEBAR_ITEMS } from '@/app/config/sidebar'
-
+import CompanySwitcher from '@/components/sidebar/CompanySwitcher'
 
 export default function Sidebar() {
   const router = useRouter()
@@ -15,7 +15,6 @@ export default function Sidebar() {
     if (!href) return false
     return pathname === href
   }
-
 
   function handleAction(id: string) {
     if (id === 'logout') {
@@ -29,20 +28,13 @@ export default function Sidebar() {
 
   return (
     <aside className="flex h-screen w-64 flex-col border-r border-white/10 bg-black">
-      {/* Header / Workspace */}
+      
+      {/* Company Switcher (HEADER REAL) */}
       <div className="p-4 border-b border-white/10">
-        <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded bg-white/10 flex items-center justify-center">
-            S
-          </div>
-          <div className="text-sm">
-            <div className="font-medium">Scope</div>
-            <div className="opacity-60 text-xs">Workspace</div>
-          </div>
-        </div>
+        <CompanySwitcher />
       </div>
 
-      {/* Nav */}
+      {/* Navigation */}
       <nav className="flex-1 p-2">
         {topItems.map(item => {
           const Icon = ICONS[item.icon]
@@ -64,7 +56,6 @@ export default function Sidebar() {
             </Link>
           ) : null
         })}
-
       </nav>
 
       {/* Bottom actions */}
@@ -103,7 +94,6 @@ export default function Sidebar() {
           )
         })}
       </div>
-
     </aside>
   )
 }

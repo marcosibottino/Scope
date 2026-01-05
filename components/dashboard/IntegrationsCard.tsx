@@ -1,12 +1,24 @@
 import Link from 'next/link'
 import { ICONS } from '@/components/icons'
 
-export default function IntegrationsCard() {
+type IntegrationsCardProps = {
+  connected: number
+  issues: number
+  items: readonly string[]
+}
+
+
+export default function IntegrationsCard({
+  connected,
+  issues,
+  items,
+}: IntegrationsCardProps) {
   const Icon = ICONS['integrations']
 
-  // Fake state
-  const connected = 4
-  const issues = 1
+  const status =
+    issues === 0
+      ? { label: 'Healthy', color: 'text-green-400' }
+      : { label: 'Partial', color: 'text-yellow-400' }
 
   return (
     <Link
@@ -24,8 +36,8 @@ export default function IntegrationsCard() {
           <h3 className="text-sm font-medium">Integrations</h3>
         </div>
 
-        <span className="text-xs text-yellow-400">
-          ● Partial
+        <span className={`text-xs ${status.color}`}>
+          ● {status.label}
         </span>
       </div>
 
@@ -43,12 +55,18 @@ export default function IntegrationsCard() {
       </div>
 
       {/* Integrations list */}
-      <div className="mt-3 flex flex-wrap gap-2 text-xs opacity-70">
-        <span className="rounded bg-white/10 px-2 py-1">Slack</span>
-        <span className="rounded bg-white/10 px-2 py-1">Google</span>
-        <span className="rounded bg-white/10 px-2 py-1">GitHub</span>
-        <span className="rounded bg-white/10 px-2 py-1">Notion</span>
-      </div>
+      {items.length > 0 && (
+        <div className="mt-3 flex flex-wrap gap-2 text-xs opacity-70">
+          {items.map(item => (
+            <span
+              key={item}
+              className="rounded bg-white/10 px-2 py-1"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+      )}
 
       {/* Footer */}
       <div className="mt-4 text-xs opacity-60 group-hover:opacity-100">

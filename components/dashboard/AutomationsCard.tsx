@@ -1,8 +1,21 @@
 import Link from 'next/link'
 import { ICONS } from '@/components/icons'
 
-export default function AutomationsCard() {
+type AutomationsCardProps = {
+  active: number
+  lastRun: string
+  status: 'running' | 'idle'
+}
+
+
+export default function AutomationsCard({
+  active,
+  lastRun,
+  status,
+}: AutomationsCardProps) {
   const Icon = ICONS['automations']
+
+  const isRunning = status === 'running'
 
   return (
     <Link
@@ -20,8 +33,14 @@ export default function AutomationsCard() {
           <h3 className="text-sm font-medium">Automations</h3>
         </div>
 
-        <span className="text-xs text-green-400">
-          ● Running
+        <span
+          className={`
+            text-xs flex items-center gap-1
+            ${isRunning ? 'text-green-400' : 'text-white/50'}
+          `}
+        >
+          <span className="h-1.5 w-1.5 rounded-full bg-current" />
+          {isRunning ? 'Running' : 'Idle'}
         </span>
       </div>
 
@@ -29,12 +48,12 @@ export default function AutomationsCard() {
       <div className="mt-4 space-y-2 text-sm">
         <div className="flex justify-between opacity-80">
           <span>Active workflows</span>
-          <span className="font-medium">3</span>
+          <span className="font-medium">{active}</span>
         </div>
 
         <div className="flex justify-between opacity-80">
           <span>Last run</span>
-          <span className="font-medium">2m ago</span>
+          <span className="font-medium">{lastRun}</span>
         </div>
       </div>
 
@@ -45,3 +64,4 @@ export default function AutomationsCard() {
     </Link>
   )
 }
+

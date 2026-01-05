@@ -1,23 +1,30 @@
 import Link from 'next/link'
 import { ICONS } from '@/components/icons'
 
-export default function ReportsCard() {
-  const Icon = ICONS['reports']
+type ReportsCardProps = {
+  series: number[]
+  generated: number
+  lastReport: string
+}
 
-  // Fake data (reports generated over time)
-  const data = [2, 4, 3, 6, 5, 7, 6, 9, 8, 11, 10, 14]
+export default function ReportsCard({
+  series,
+  generated,
+  lastReport,
+}: ReportsCardProps) {
+  const Icon = ICONS['reports']
 
   const width = 260
   const height = 90
   const padding = 8
 
-  const max = Math.max(...data)
+  const max = Math.max(...series, 1)
 
-  const points = data
+  const points = series
     .map((value, index) => {
       const x =
         padding +
-        (index / (data.length - 1)) * (width - padding * 2)
+        (index / (series.length - 1)) * (width - padding * 2)
 
       const y =
         height -
@@ -85,10 +92,7 @@ export default function ReportsCard() {
           </defs>
 
           {/* Area */}
-          <path
-            d={areaPath}
-            fill="url(#reportsGradient)"
-          />
+          <path d={areaPath} fill="url(#reportsGradient)" />
 
           {/* Line */}
           <polyline
@@ -116,12 +120,12 @@ export default function ReportsCard() {
       <div className="mt-3 space-y-1 text-sm">
         <div className="flex justify-between opacity-80">
           <span>Reports generated</span>
-          <span className="font-medium">28</span>
+          <span className="font-medium">{generated}</span>
         </div>
 
         <div className="flex justify-between opacity-80">
           <span>Last report</span>
-          <span className="font-medium">1h ago</span>
+          <span className="font-medium">{lastReport}</span>
         </div>
       </div>
 

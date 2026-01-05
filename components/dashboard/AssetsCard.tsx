@@ -1,7 +1,17 @@
 import Link from 'next/link'
 import { ICONS } from '@/components/icons'
 
-export default function AssetsCard() {
+type AssetsCardProps = {
+  total: number
+  storage: string
+  lastUpload: string
+}
+
+export default function AssetsCard({
+  total,
+  storage,
+  lastUpload,
+}: AssetsCardProps) {
   const Icon = ICONS['assets']
 
   return (
@@ -26,17 +36,17 @@ export default function AssetsCard() {
       <div className="mt-4 space-y-2 text-sm">
         <div className="flex justify-between opacity-80">
           <span>Total files</span>
-          <span className="font-medium">124</span>
+          <span className="font-medium">{total}</span>
         </div>
 
         <div className="flex justify-between opacity-80">
           <span>Storage used</span>
-          <span className="font-medium">3.4 GB</span>
+          <span className="font-medium">{storage}</span>
         </div>
 
         <div className="flex justify-between opacity-80">
           <span>Last upload</span>
-          <span className="font-medium">10m ago</span>
+          <span className="font-medium">{lastUpload}</span>
         </div>
       </div>
 

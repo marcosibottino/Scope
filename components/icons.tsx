@@ -49,13 +49,12 @@ export const ICONS: Record<string, () => JSX.Element> = {
   home: HomeIcon,
   settings: SettingsIcon,
   logout: LogoutIcon,
-
   automations: AutomationsIcon,
   assets: AssetsIcon,
   reports: ReportsIcon,
   integrations: IntegrationsIcon,
   users: UsersIcon,
   notifications: NotificationsIcon,
-  meeting: MeetingIcon,
+  meetings: MeetingIcon,
   audit: AuditIcon,
 }

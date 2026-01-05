@@ -71,7 +71,7 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
     id: 'meetings',
     label: 'Meetings',
     href: '/dashboard/services/meeting',
-    icon: 'meeting',
+    icon: 'meetings',
     section: 'services',
     status: 'later',
   },
