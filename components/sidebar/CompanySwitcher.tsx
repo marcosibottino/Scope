@@ -3,10 +3,14 @@
 import { useEffect, useState } from 'react'
 import { companies } from '@/lib/company'
 import { getActiveCompany, setActiveCompany } from '@/lib/activeCompany'
+import { useCompany } from '../company/CompanyProvider'
 
 export default function CompanySwitcher() {
   const [open, setOpen] = useState(false)
   const [activeId, setActiveId] = useState<string | null>(null)
+
+  const { companyId, setCompanyId } = useCompany()
+  const active = companies.find(c => c.id === companyId)!
 
   useEffect(() => {
     const stored = getActiveCompany()
@@ -20,7 +24,7 @@ export default function CompanySwitcher() {
     )
   }
 
-  const active = companies.find(c => c.id === activeId)!
+  // const active = companies.find(c => c.id === activeId)!
 
   return (
     <div className="relative">
@@ -60,8 +64,7 @@ export default function CompanySwitcher() {
             <button
               key={company.id}
               onClick={() => {
-                setActiveCompany(company.id)
-                setActiveId(company.id) // ✅ SIN reload
+                setCompanyId(company.id)
                 setOpen(false)
               }}
               className="
@@ -79,7 +82,7 @@ export default function CompanySwitcher() {
                   </span>
                 </div>
 
-                {company.id === activeId && (
+                {company.id === companyId && (
                   <span className="text-xs opacity-60">✓</span>
                 )}
               </div>

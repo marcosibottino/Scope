@@ -9,22 +9,19 @@ import ActivityCard from "@/components/dashboard/ActivityCard";
 import { HOME_DATA, type CompanyId } from '@/lib/homeData'
 import { useEffect, useState } from "react";
 import { getActiveCompany } from "@/lib/activeCompany";
+import { useCompany } from "@/components/company/CompanyProvider";
 
 
 export default function DashboardPage() {
 
-  const [companyId, setCompanyId] = useState<CompanyId | null>(null)
-
-    useEffect(() => {
-      const stored = getActiveCompany() as CompanyId | null
-      setCompanyId(stored)
-    }, [])
+  // const [companyId, setCompanyId] = useState<CompanyId | null>(null)
+    const { companyId } = useCompany()
+    const data = HOME_DATA[companyId]
 
     if (!companyId) {
       return <div className="p-8 opacity-50">Loading dashboard…</div>
     }
 
-    const data = HOME_DATA[companyId]
 
   return (
     <div className="p-8">

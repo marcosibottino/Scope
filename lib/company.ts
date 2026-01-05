@@ -1,7 +1,9 @@
+import type { CompanyId } from '@/lib/homeData'
+
 export type Company = {
-  id: string
+  id: CompanyId
   name: string
-  environment: 'production' | 'staging' | 'development'
+  environment: 'production' | 'development'
 }
 
 export const companies: Company[] = [
@@ -21,3 +23,4 @@ export const companies: Company[] = [
     environment: 'production',
   },
 ]
+
